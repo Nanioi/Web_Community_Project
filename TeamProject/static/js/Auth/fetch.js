@@ -2,7 +2,8 @@ import * as LINK from "../config.js"
 import * as AUTH from "./main.js"
 import * as EVENT_AUTH from "./event.js"
 
-export function get_membership_information() {
+// --------------------- 회원가입 Fetch API ------------------
+export function get_membership_information() { // main 옮기기
 	var profile = new Array();
 
 	profile[0] = document.querySelector("#signup_name");
@@ -16,46 +17,47 @@ export function get_membership_information() {
 
 	if (signup_input_check(profile)) send_data_enterd_at_signup(profile);
 }
+// ----------- 회원가입 정보 체크 ------------
 export function signup_input_check(profile) {
-	for (var i = 0; i < 7; i++) {
-		if (!profile[i].value) {
-			alert_message(profile[i]);
-			return false;
-		} else if (i === 3 && profile[i - 1].value !== profile[i].value) {
-			alert_message(profile[i], false);
-			return false;
-		}
-	}
-	return true;
+    for (var i = 0; i < 7; i++) {
+        if (!profile[i].value) {
+            alert_message(profile[i]);
+            return false;
+        }else if(i===3 && profile[i-1].value !==profile[i].value){
+            alert_message(profile[i],false);
+            return false;
+        }
+    }
+    return true;
 }
 export function alert_message(input, pw_check) {
-	input.focus();
-	if (input.id === "signup_name") {
-		alert("이름을 입력해주세요.");
-		return;
-	} else if (input.id === "signup_id") {
-		alert("아이디를 입력해주세요.");
-		return;
-	} else if (input.id === "signup_pw") {
-		alert("비밀번호를 입력해주세요.");
-		return;
-	} else if (input.id === "signup_pw2") {
-		if (pw_check == false) {
-			alert("비밀번호 확인란을 확인해주세요.")
-			return;
-		}
-		alert("비밀번호 확인란을 입력해주세요.");
-		return;
-	} else if (input.id === "signup_nickname") {
-		alert("닉네임을 입력해주세요.");
-		return;
-	} else if (input.id === "signup_email") {
-		alert("이메일을 입력해주세요.");
-		return;
-	} else if (input.id === "signup_birth") {
-		alert("생년월일을 입력해주세요.");
-		return;
-	}
+    input.focus();
+    if (input.id === "signup_name") {
+        alert("이름을 입력해주세요.");
+        return;
+    } else if (input.id === "signup_id") {
+        alert("아이디를 입력해주세요.");
+        return;
+    } else if (input.id === "signup_pw") {
+        alert("비밀번호를 입력해주세요.");
+        return;
+    } else if (input.id === "signup_pw2") {
+        if (pw_check == false) {
+            alert("비밀번호 확인란을 확인해주세요.")
+            return;
+        }
+        alert("비밀번호 확인란을 입력해주세요.");
+        return;
+    } else if (input.id === "signup_nickname") {
+        alert("닉네임을 입력해주세요.");
+        return;
+    } else if (input.id === "signup_email") {
+        alert("이메일을 입력해주세요.");
+        return;
+    } else if (input.id === "signup_birth") {
+        alert("생년월일을 입력해주세요.");
+        return;
+    }
 }
 export function send_data_enterd_at_signup(profile) {
 
@@ -110,14 +112,16 @@ export function check_input_data_at_signup(profile, send_data) {
 			}
 		})
 }
+// ---------------- 메인의 로그인 버튼 실행 함수 ----------------
 export function main_login_btn_func() {
 
-	const main_login_btn = document.querySelector(".main_login_btn");
-	const main_login_id = document.querySelector("#main_login_id");
-	const main_login_pw = document.querySelector("#main_login_pw");
+    const main_login_btn = document.querySelector(".main_login_btn");
+    const main_login_id = document.querySelector("#main_login_id");
+    const main_login_pw = document.querySelector("#main_login_pw");
 
-	EVENT_AUTH.attach_login_event(main_login_btn, main_login_id, main_login_pw);
+    EVENT_AUTH.attach_login_event(main_login_btn, main_login_id, main_login_pw);
 }
+// ------------------------ 로그인 Fetch API ----------------------------
 export function send_data_enterd_at_login(id, pw) {
 	const send_data = {
 		'userid': id.value,
@@ -149,12 +153,14 @@ export function check_input_data_at_login(send_data) {
 			}
 		})
 }
+// -------------------------- 유저 정보 불러오기 fetch api ------------------------
 export function get_user_information() {
 	if (sessionStorage.length === 0) return;
 	else if (sessionStorage.length === 1)
 		if (sessionStorage.getItem("access_token") === 0) return;
 
 	const token = sessionStorage.getItem('access_token');
+
 	const user_info_url = LINK.AUTH_API + "/user_info";
 	fetch(user_info_url, {
 			method: "GET",
