@@ -1,7 +1,7 @@
 import * as LINK from "../../config.js"
 
 export function save_about_search_data(search_type, input_data) {
-    const data = { //검색한 내용에대한 데이터
+    const data = { 
         'searchType': search_type.querySelector('select').value,
         'text': `${input_data.value}`
     }

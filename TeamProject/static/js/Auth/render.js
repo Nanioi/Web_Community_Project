@@ -1,6 +1,5 @@
 import * as LINK from "../config.js"
 import * as EVENT_AUTH from "./event.js"
-import * as AUTH from "./main.js"
 import * as FETCH_AUTH from "./fetch.js"
 
 // -------- 로그인 창 모달 ------------
