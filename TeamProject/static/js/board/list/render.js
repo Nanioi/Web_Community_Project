@@ -1,9 +1,9 @@
 import * as LINK from "../../config.js"
 import * as MAIN from "../common/main.js"
-import * as FETCH_USR from "../user/fetch.js"
 import * as EVENT_LIST from "./event.js"
 import * as FETCH_LIST from "./fetch.js"
 import * as EVENT_POST from "../post/event.js"
+import * as FETCH_USR from "../user/fetch.js"
 
 //게시판 초기화 랜더링
 export function init_post() { //render_init()
