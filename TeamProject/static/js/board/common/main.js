@@ -1,5 +1,5 @@
 import * as FETCH from "./fetch.js";
-import * as RENDER from "./render.js";
+import * as REND from "./render.js";
 import * as REND_LIST from "../list/render.js"
 import * as FETCH_LIST from "../list/fetch.js"
 import * as EVENT from "./event.js"
@@ -11,7 +11,7 @@ export async function loading_best_post() {
     const board_id = location.hash.split('#')[1];
     const data = await FETCH.get_best_post_information(board_id);
     if (data !== null) {
-      RENDER.best_post(data);
+      REND.best_post(data);
     }
   } catch (error) {
     console.log(error);
@@ -40,7 +40,7 @@ export function search_function() {
 // 검색결과를 랜더링 해주는 함수
 export const loading_search_results_posts = async (hash_value, json) => { //render_searchResult()
   const data = json.returnlist;
-  RENDER.title_and_side_setting(hash_value);
+  REND.title_and_side_setting(hash_value);
 
   if (hash_value[1] === 'total') { //전체게시판 검색일경우
     document.querySelectorAll('.post_board').forEach(item => item.style.cssText = 'display : block');
